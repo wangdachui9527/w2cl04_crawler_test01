@@ -50,6 +50,7 @@ public class HttpUtils {
 
         //2.1、设置请求配置参数(如：超时时间等)
         httpGet.setConfig(this.getConfig());
+        httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0");
 
         CloseableHttpResponse response = null;
         try {

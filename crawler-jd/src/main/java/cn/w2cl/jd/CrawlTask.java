@@ -78,7 +78,7 @@ public class CrawlTask {
                 double price = MAPPER.readTree(priceStr).get(0).get("p").asDouble();
                 item.setPrice(price);
                 //商品标题
-                String infoHtml = httpUtils.doGetImage(item.getUrl());
+                String infoHtml = httpUtils.doGetHtml(item.getUrl());
                 Document itemDoc = Jsoup.parse(infoHtml);
                 String title = itemDoc.select("div.sku-name").first().text();
                 item.setTitle(title);
