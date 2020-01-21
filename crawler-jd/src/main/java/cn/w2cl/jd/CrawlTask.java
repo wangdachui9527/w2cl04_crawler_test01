@@ -35,7 +35,7 @@ public class CrawlTask {
         //共145页
         String url1 = "https://list.jd.com/list.html?cat=9987,653,655&page=";
         String url2 = "&sort=sort_rank_asc&trans=1&JL=6_0_0&ms=10#J_main";
-        for(int i = 1 ; i < 146; i++){
+        for(int i = 1 ; i < 6; i++){
             String htmlContent = httpUtils.doGetHtml(url1 + i + url2);
             //解析数据
             this.parse(htmlContent);
@@ -63,12 +63,12 @@ public class CrawlTask {
                     continue;
                 }
 
-                //商品图片
-                String imgSrc = "https:" + element.select("img[data-sku]").first().attr("src");
-                String replace = imgSrc.replace("/n9/", "/n1/");
-                //下载图片
-                String picName = httpUtils.doGetImage(replace);
-                item.setPic(picName);
+//                //商品图片
+//                String imgSrc = "https:" + element.select("img[data-sku]").first().attr("src");
+//                String replace = imgSrc.replace("/n9/", "/n1/");
+//                //下载图片
+//                String picName = httpUtils.doGetImage(replace);
+//                item.setPic(picName);
 
                 //商品详情地址
                 String url = "https://item.jd.com/" + sku + ".html";
@@ -86,6 +86,8 @@ public class CrawlTask {
                 item.setCreated(new Date());
                 //商品更新时间
                 item.setUpdated(item.getCreated());
+
+                itemService.save(item);
             }
         }
 
